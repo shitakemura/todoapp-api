@@ -30,4 +30,9 @@ final class TodoController {
             return todo.delete(on: req)
         }.transform(to: .ok)
     }
+
+    /// Deletes All `Todo`s
+    func clear(_ req: Request) throws -> Future<HTTPStatus> {
+        return Todo.query(on: req).delete().transform(to: .ok)
+    }
 }
