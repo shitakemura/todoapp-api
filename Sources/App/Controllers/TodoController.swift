@@ -19,6 +19,7 @@ final class TodoController {
         return try req.parameters.next(Todo.self).flatMap { todo in
             return try req.content.decode(Todo.self).flatMap { newTodo in
                 todo.title = newTodo.title
+                todo.isDone = newTodo.isDone
                 return todo.save(on: req)
             }
         }
