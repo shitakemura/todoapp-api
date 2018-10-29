@@ -18,7 +18,7 @@ final class TodoController {
     func update(_ req: Request) throws -> Future<Todo> {
         return try req.parameters.next(Todo.self).flatMap { todo in
             return try req.content.decode(Todo.self).flatMap { newTodo in
-                todo.title = newTodo.title
+                todo.taskName = newTodo.taskName
                 todo.isDone = newTodo.isDone
                 return todo.save(on: req)
             }

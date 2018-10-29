@@ -3,19 +3,13 @@ import Vapor
 
 /// A single entry of a Todo list.
 final class Todo: SQLiteModel {
-    /// The unique identifier for this `Todo`.
     var id: Int?
-
-    /// A title describing what this `Todo` entails.
-    var title: String
-
-    // チェックあり・なし
-    var isDone: Bool
+    var taskName: String
+    var isDone: Bool        // チェックあり・なし
     
-    /// Creates a new `Todo`.
     init(id: Int? = nil, title: String, isDone: Bool) {
         self.id = id
-        self.title = title
+        self.taskName = title
         self.isDone = isDone
     }
 }
