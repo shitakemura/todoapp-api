@@ -9,6 +9,7 @@ final class Todo: SQLiteModel {
     /// A title describing what this `Todo` entails.
     var title: String
 
+    // チェックあり・なし
     var isDone: Bool
     
     /// Creates a new `Todo`.

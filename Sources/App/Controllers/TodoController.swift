@@ -2,19 +2,19 @@ import Vapor
 
 /// Controls basic CRUD operations on `Todo`s.
 final class TodoController {
-    /// Returns a list of all `Todo`s.
+    // 全Todoの取得
     func index(_ req: Request) throws -> Future<[Todo]> {
         return Todo.query(on: req).all()
     }
 
-    /// Saves a decoded `Todo` to the database.
+    // Todo追加
     func create(_ req: Request) throws -> Future<Todo> {
         return try req.content.decode(Todo.self).flatMap { todo in
             return todo.save(on: req)
         }
     }
     
-    /// Updates a parameterized `Todo`.
+    // Todo更新
     func update(_ req: Request) throws -> Future<Todo> {
         return try req.parameters.next(Todo.self).flatMap { todo in
             return try req.content.decode(Todo.self).flatMap { newTodo in
@@ -25,14 +25,14 @@ final class TodoController {
         }
     }
 
-    /// Deletes a parameterized `Todo`.
+    // Todo削除
     func delete(_ req: Request) throws -> Future<HTTPStatus> {
         return try req.parameters.next(Todo.self).flatMap { todo in
             return todo.delete(on: req)
         }.transform(to: .ok)
     }
 
-    /// Deletes All `Todo`s
+    // Todo全削除
     func clear(_ req: Request) throws -> Future<HTTPStatus> {
         return Todo.query(on: req).delete().transform(to: .ok)
     }
